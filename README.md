@@ -20,25 +20,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: kanga333/variable-mapper@master
+    - uses: jm4rt1ns/variable-mapper@master
       with:
-        key: "${{github.base_ref}}"
+        key: "${{github.ref}}"
         map: |
           {
-            "master": {
+            "master$": {
               "environment": "production",
               "AWS_ACCESS_KEY_ID": "${{ secrets.PROD_AWS_ACCESS_KEY_ID }}",
               "AWS_SECRET_ACCESS_KEY": "${{ secrets.PROD_AWS_ACCESS_KEY_ID }}"
             },
-            "staging": {
-              "environment": "staging",
+            "develop$": {
+              "environment": "development",
               "AWS_ACCESS_KEY_ID": "${{ secrets.STG_AWS_ACCESS_KEY_ID }}",
               "AWS_SECRET_ACCESS_KEY": "${{ secrets.STG_AWS_ACCESS_KEY_ID }}"
-            },
-            ".*": {
-              "environment": "development",
-              "AWS_ACCESS_KEY_ID": "${{ secrets.DEV_AWS_ACCESS_KEY_ID }}",
-              "AWS_SECRET_ACCESS_KEY": "${{ secrets.DEV_AWS_ACCESS_KEY_ID }}"
             }
           }
     - name: Echo environment
@@ -56,16 +51,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: kanga333/variable-mapper@master
+    - uses: jm4rt1ns/variable-mapper@master
       id: export
       with:
-        key: "${{github.base_ref}}"
+        key: "${{github.ref}}"
         map: |
           {
-            "master": {
+            "master$": {
               "environment": "production"
             },
-            ".*": {
+            "develop$": {
               "environment": "development"
             }
           }
@@ -94,7 +89,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: kanga333/variable-mapper@master
+    - uses: jm4rt1ns/variable-mapper@master
       id: export
       with:
         key: "first"
