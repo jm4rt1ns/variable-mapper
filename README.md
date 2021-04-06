@@ -126,7 +126,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: kanga333/variable-mapper@master
+    - uses: jm4rt1ns/variable-mapper@master
       id: export
       with:
         key: "first"
@@ -163,7 +163,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: kanga333/variable-mapper@master
+    - uses: jm4rt1ns/variable-mapper@master
       id: export
       with:
         key: "first"
